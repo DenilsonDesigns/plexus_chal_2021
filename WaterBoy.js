@@ -41,14 +41,16 @@ class WaterBoy {
   checkIndividualGlass(rowNum, glassNum) {
     if (rowNum > this.glasses.length - 1) {
       return console.log(
-        `Row ${rowNum} does not exist! Number of rows is: ${
+        `Row ${rowNum} does not exist! Highest row no. is: ${
           this.glasses.length - 1
         }`
       );
     }
     if (glassNum > this.glasses[rowNum].length - 1) {
       return console.log(
-        `There are only ${this.glasses[rowNum].length} glasses in row ${rowNum}`
+        `Glass ${glassNum} does not exist! Highest glass no. is: ${
+          this.glasses[rowNum].length - 1
+        } in row no. ${rowNum}`
       );
     }
 
