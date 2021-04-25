@@ -1,32 +1,21 @@
-// WaterBoy class here.
 class WaterBoy {
-  // only thing need to pass in with the constructor is the initial MLs.
-  constructor(totalML, rowNum, glassNum) {
+  constructor(totalML) {
     this.millilitres = totalML;
-    this.rowNum = rowNum;
-    this.glassNum = glassNum;
-    this.cups = [];
+    this.glasses = [];
   }
   // *** getters
   getMillilitres() {
     return this.millilitres;
   }
 
-  getRowRum() {
-    return this.rowNum;
+  getGlasses() {
+    return this.glasses;
   }
 
-  getGlassNum() {
-    return this.glassNum;
-  }
-  getCups() {
-    return this.cups;
-  }
+  fillGlasses() {
+    let glasses = [];
 
-  fillCups(totalML) {
-    let cups = [];
-
-    let currML = totalML;
+    let currML = this.millilitres;
     let currRowNum = 0;
 
     while (currML > 0) {
@@ -34,19 +23,38 @@ class WaterBoy {
       let mlUsed = 0;
       let maxMLallowedForRow = (currRowNum + 1) * 250;
       [currRow, mlUsed] = this.fillRow(currRow, currML, maxMLallowedForRow);
-      cups.push(currRow);
+      glasses.push(currRow);
       currRowNum++;
       currML -= mlUsed;
-      this.cups = cups;
+      this.glasses = glasses;
     }
   }
 
   fillRow(row, mL, upperLimit) {
     let maxMl = row.length * 250;
     let totalMlUsed = Math.min(mL, maxMl, upperLimit);
-    let mLperCup = totalMlUsed / row.length;
+    let mLperGlass = totalMlUsed / row.length;
 
-    return [row.fill(mLperCup), totalMlUsed];
+    return [row.fill(mLperGlass), totalMlUsed];
+  }
+
+  checkIndividualGlass(rowNum, glassNum) {
+    if (rowNum > this.glasses.length - 1) {
+      return console.log(
+        `Row ${rowNum} does not exist! Number of rows is: ${
+          this.glasses.length - 1
+        }`
+      );
+    }
+    if (glassNum > this.glasses[rowNum].length - 1) {
+      return console.log(
+        `There are only ${this.glasses[rowNum].length} glasses in row ${rowNum}`
+      );
+    }
+
+    return console.log(
+      `At row number: ${rowNum}, and glass number: ${glassNum} there is: ${this.glasses[rowNum][glassNum]} millilitres.`
+    );
   }
 }
 
